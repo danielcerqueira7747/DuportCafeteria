@@ -13,13 +13,12 @@ export default function Contact() {
 
   const whatsappNumber = "551338774083";
 
-  const validPhone = (p) => {
-
+  const validPhone = (p: string) => {
     const digits = p.replace(/\D/g, "");
     return digits.length >= 10 && digits.length <= 13;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!name.trim() || !validPhone(phone)) return;
 
@@ -30,11 +29,9 @@ export default function Contact() {
     );
     const url = `https://wa.me/${whatsappNumber}?text=${message}`;
 
-    // small delay to let button animation show
     setTimeout(() => {
       window.open(url, "_blank");
       setSubmitting(false);
-      // optional: clear form
       setName("");
       setPhone("");
     }, 500);
@@ -145,9 +142,4 @@ export default function Contact() {
       </div>
     </section>
   );
-}
-
-function validPhone(p) {
-  const digits = (p || "").replace(/\D/g, "");
-  return digits.length >= 10 && digits.length <= 13;
 }
