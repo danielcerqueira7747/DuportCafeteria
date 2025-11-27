@@ -20,9 +20,19 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (!name.trim() || !validPhone(phone)) return;
 
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "form_lead_submit",
+      formName: "primeira_visita",
+      name,
+      phone,
+    });
+
     setSubmitting(true);
+
     const cleanPhone = phone.replace(/\D/g, "");
     const message = encodeURIComponent(
       `Olá! Quero aproveitar a promoção de primeira visita.\n\n*Nome:* ${name}\n*WhatsApp:* ${phone}`
@@ -36,6 +46,7 @@ export default function Contact() {
       setPhone("");
     }, 500);
   };
+
 
   return (
     <section className="w-full bg-white/80 py-16 md:py-24 relative overflow-hidden" id="contact">
