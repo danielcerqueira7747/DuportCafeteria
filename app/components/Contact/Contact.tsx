@@ -1,5 +1,11 @@
 "use client";
 
+declare global {
+  interface Window {
+    dataLayer: Record<string, any>[];
+  }
+}
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { User, Smartphone, Send } from "lucide-react";
